@@ -17,6 +17,8 @@ __pycache__/
 # Git
 .git/
 .github/
+.gitignore
+.clawhubignore
 
 # Migration scripts (one-time use)
 scripts/migrate_*.py
