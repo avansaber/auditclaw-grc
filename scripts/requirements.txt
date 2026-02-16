@@ -1,2 +1,2 @@
 # Runtime dependency for HTTP header scanning (check_headers.py)
-requests>=2.28.0
+requests==2.31.0
