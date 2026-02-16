@@ -3,6 +3,7 @@ name: auditclaw-grc
 description: AI-native GRC (Governance, Risk, and Compliance) for OpenClaw. 97 actions across 13 frameworks including SOC 2, ISO 27001, HIPAA, GDPR, NIST CSF, PCI DSS, CIS Controls, CMMC, HITRUST, CCPA, FedRAMP, ISO 42001, and SOX ITGC. Manages controls, evidence, risks, policies, vendors, incidents, assets, training, vulnerabilities, access reviews, and questionnaires. Generates compliance scores, reports, dashboards, and trust center pages. Runs security header, SSL, and GDPR scans. Connects to AWS, Azure, GCP, GitHub, and identity providers via companion skills.
 version: 1.0.0
 user-invocable: true
+homepage: https://github.com/avansaber/auditclaw-grc
 metadata: {"openclaw":{"type":"executable","requires":{"bins":["python3"],"anyBins":["chromium","google-chrome","brave","chromium-browser"],"env":[]},"os":["darwin","linux"]}}
 ---
 
@@ -15,10 +16,24 @@ AI-native GRC assistant for OpenClaw. Manages compliance frameworks, controls, e
 ## Security Model
 
 - **Database**: SQLite at `~/.openclaw/grc/compliance.sqlite` with WAL mode, owner-only permissions (0o600)
-- **Credentials**: Stored in `~/.openclaw/grc/credentials/` with per-provider directories, owner-only permissions (0o700 dirs, 0o600 files), atomic writes, and secure deletion (overwrite with random bytes before removal). Secrets are never logged or exposed in output.
+- **Credentials**: Stored in `~/.openclaw/grc/credentials/` with per-provider directories, owner-only permissions (0o700 dirs, 0o600 files), atomic writes, and secure deletion (overwrite with random bytes before removal). Secrets are never logged or exposed in output. See `scripts/credential_store.py` for implementation.
 - **Trust center**: Generates a local HTML file only. Nothing is published externally. The user decides where to host it.
-- **Dependencies**: `requests==2.31.0` (pinned) for HTTP header scanning. No other runtime dependencies.
+- **Dependencies**: `requests==2.31.0` (pinned) for HTTP header scanning. Cloud integrations optionally use `boto3` (AWS) and `PyJWT` (Azure) via try/except -- these are not required and only activate if installed and credentials are configured.
 - **Scans**: All security scans (headers, SSL, GDPR) run locally against user-specified URLs only.
+- **No telemetry**: No data is sent to external endpoints. All operations are local or to user-configured cloud accounts only.
+
+### Optional Environment Variables (for cloud integrations)
+
+These are **not required** for core GRC functionality. They are only used when the user explicitly sets up cloud provider integrations via companion skills:
+
+| Variable | Used by |
+|----------|---------|
+| `AWS_ACCESS_KEY_ID` / `AWS_SECRET_ACCESS_KEY` | AWS integration (via auditclaw-aws) |
+| `GITHUB_TOKEN` | GitHub integration (via auditclaw-github) |
+| `AZURE_SUBSCRIPTION_ID` / `AZURE_CLIENT_ID` / `AZURE_CLIENT_SECRET` / `AZURE_TENANT_ID` | Azure integration (via auditclaw-azure) |
+| `GCP_PROJECT_ID` / `GOOGLE_APPLICATION_CREDENTIALS` | GCP integration (via auditclaw-gcp) |
+| `GOOGLE_WORKSPACE_SA_KEY` / `GOOGLE_WORKSPACE_ADMIN_EMAIL` | Google Workspace (via auditclaw-idp) |
+| `OKTA_ORG_URL` / `OKTA_API_TOKEN` | Okta (via auditclaw-idp) |
 
 ## Setup
 
