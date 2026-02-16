@@ -22,11 +22,7 @@ from urllib.parse import urlparse
 try:
     import requests
 except ImportError:
-    print(json.dumps({
-        "status": "error",
-        "message": "requests library required. Install: pip3 install requests"
-    }), file=sys.stderr)
-    sys.exit(2)
+    requests = None
 
 
 # Security headers to check, with weight and severity if missing
@@ -82,6 +78,8 @@ def validate_url(url):
 
 def check_headers(url):
     """Fetch URL and analyze security headers."""
+    if requests is None:
+        return None, "requests library required. Install: pip3 install requests"
     try:
         response = requests.get(url, timeout=15, allow_redirects=True,
                                 headers={"User-Agent": "GRC-Compliance-Scanner/1.0"})
@@ -167,6 +165,12 @@ def format_text(result):
 
 
 def main():
+    if requests is None:
+        print(json.dumps({
+            "status": "error",
+            "message": "requests library required. Install: pip3 install requests"
+        }), file=sys.stderr)
+        sys.exit(2)
     parser = argparse.ArgumentParser(description="Check security headers for a URL")
     parser.add_argument("--url", required=True, help="URL to check")
     parser.add_argument("--format", choices=["json", "text"], default="json", help="Output format")

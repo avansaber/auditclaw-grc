@@ -19,6 +19,11 @@ SCRIPTS_DIR = os.path.join(
 # Add scripts dir to path so we can import check_headers
 sys.path.insert(0, SCRIPTS_DIR)
 
+# Ensure check_headers can be imported even without requests installed.
+# Tests mock requests.get anyway, so the real library isn't needed.
+if "requests" not in sys.modules:
+    sys.modules["requests"] = MagicMock()
+
 
 def make_mock_response(headers=None, status_code=200, url="https://example.com"):
     """Create a mock requests.Response."""
