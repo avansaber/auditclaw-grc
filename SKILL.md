@@ -3,7 +3,8 @@ name: auditclaw-grc
 description: AI-native GRC (Governance, Risk, and Compliance) for OpenClaw. 97 actions across 13 frameworks including SOC 2, ISO 27001, HIPAA, GDPR, NIST CSF, PCI DSS, CIS Controls, CMMC, HITRUST, CCPA, FedRAMP, ISO 42001, and SOX ITGC. Manages controls, evidence, risks, policies, vendors, incidents, assets, training, vulnerabilities, access reviews, and questionnaires. Generates compliance scores, reports, dashboards, and trust center pages. Runs security header, SSL, and GDPR scans. Connects to AWS, Azure, GCP, GitHub, and identity providers via companion skills.
 version: 1.0.0
 user-invocable: true
-homepage: https://github.com/avansaber/auditclaw-grc
+homepage: https://www.auditclaw.ai
+source: https://github.com/avansaber/auditclaw-grc
 metadata: {"openclaw":{"type":"executable","requires":{"bins":["python3"],"anyBins":["chromium","google-chrome","brave","chromium-browser"],"env":[]},"os":["darwin","linux"]}}
 ---
 
