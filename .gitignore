@@ -1,0 +1,60 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+
+# SQLite databases (runtime data, not source)
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
+
+# Test artifacts
+.pytest_cache/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Secrets
+.env
+.env.*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Additional artifacts
+*.db
+*.sqlite3
+*.html
+coverage/
+.coverage
+htmlcov/
+*.egg
+*.whl
+.mypy_cache/
+.ruff_cache/
+
+# Security: prevent accidental credential commits
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.cert
+credentials/
+*credentials*.json
+*secret*.json
+key.json

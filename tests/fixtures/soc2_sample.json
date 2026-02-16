@@ -1,0 +1,20 @@
+{
+  "$schema": "framework-definition-v1",
+  "id": "soc2",
+  "name": "SOC 2 Type II (Sample)",
+  "version": "2017",
+  "description": "Minimal SOC 2 for testing — 5 controls",
+  "domains": [
+    {
+      "id": "CC",
+      "name": "Common Criteria",
+      "controls": [
+        {"id": "CC1.1", "title": "Integrity and ethical values", "category": "Control Environment", "priority": 4},
+        {"id": "CC1.2", "title": "Board oversight", "category": "Control Environment", "priority": 3},
+        {"id": "CC6.1", "title": "Logical access security", "category": "Access Controls", "priority": 5},
+        {"id": "CC7.2", "title": "Monitors system components", "category": "System Operations", "priority": 5},
+        {"id": "CC7.4", "title": "Responds to security incidents", "category": "System Operations", "priority": 5}
+      ]
+    }
+  ]
+}
