@@ -266,7 +266,12 @@ CREATE TABLE IF NOT EXISTS alerts (
     triggered_at TEXT DEFAULT (datetime('now')),
     resolved_at TEXT,
     cooldown_until TEXT,
-    metadata TEXT
+    metadata TEXT,
+    drift_details TEXT,
+    resource_type TEXT,
+    resource_id TEXT,
+    acknowledged_at TEXT,
+    acknowledged_by TEXT
 );
 
 -- Control mappings (cross-framework)
@@ -452,13 +457,14 @@ CREATE INDEX IF NOT EXISTS idx_integration_credentials_status ON integration_cre
 CREATE TABLE IF NOT EXISTS integrations (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     provider TEXT NOT NULL,
-    status TEXT DEFAULT 'pending',
-    config TEXT,
+    name TEXT NOT NULL,
+    status TEXT DEFAULT 'configured',
     schedule TEXT,
     last_sync TEXT,
     next_sync TEXT,
     last_error TEXT,
     error_count INTEGER DEFAULT 0,
+    config TEXT,
     created_at TEXT DEFAULT (datetime('now')),
     updated_at TEXT DEFAULT (datetime('now'))
 );
@@ -469,10 +475,11 @@ CREATE INDEX IF NOT EXISTS idx_integrations_status ON integrations(status);
 -- Incident actions (timeline entries for incidents)
 CREATE TABLE IF NOT EXISTS incident_actions (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    incident_id INTEGER REFERENCES incidents(id) ON DELETE CASCADE,
+    incident_id INTEGER NOT NULL REFERENCES incidents(id),
     action_type TEXT NOT NULL,
+    title TEXT NOT NULL,
     description TEXT,
-    performed_by TEXT,
+    action_taken_at TEXT DEFAULT (datetime('now')),
     outcome TEXT,
     created_at TEXT DEFAULT (datetime('now'))
 );

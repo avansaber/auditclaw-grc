@@ -3390,9 +3390,11 @@ def action_add_alert(conn, args):
     metadata_str = _json.dumps(meta) if meta else None
 
     cursor = conn.execute(
-        """INSERT INTO alerts (type, title, severity, message, metadata)
-           VALUES (?, ?, ?, ?, ?)""",
-        (alert_type, title, severity, description, metadata_str)
+        """INSERT INTO alerts (type, title, severity, message, metadata,
+                               resource_type, resource_id, drift_details)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?)""",
+        (alert_type, title, severity, description, metadata_str,
+         resource_type, resource_id_val, drift_details)
     )
     conn.commit()
 

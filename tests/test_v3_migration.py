@@ -279,8 +279,9 @@ class TestFreshInstallPath:
             for idx_name in V3_NEW_INDEXES:
                 assert idx_name in indexes, f"Index {idx_name} missing"
 
-            # Verify total table count (27 V2 + 5 V3 = 32)
-            assert len(tables) == 33
+            # Verify total table count (30 init_db + 4 new V3 = 34)
+            # init_db already creates incident_actions, so migrate_v3 adds 4
+            assert len(tables) == 34
 
             conn.close()
         finally:
@@ -302,7 +303,7 @@ class TestFreshInstallPath:
 
             assert result["previous_version"] == "6.0.0"
             assert result["target_version"] == "3.0.0"
-            assert len(result["tables_created"]) == 5
+            assert len(result["tables_created"]) == 4
             assert len(result["indexes_created"]) == 13
             # All 15 columns should be added (including impact_assessment which exists in V2)
             # Actually impact_assessment exists in V2 init_db so it will be a warning

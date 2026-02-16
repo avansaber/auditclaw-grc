@@ -157,9 +157,9 @@ class TestV4Migration:
             assert result["status"] == "ok"
             assert "DRY RUN" in result["message"]
 
-            # Tables should NOT exist yet
+            # browser_checks should NOT exist yet (V4-only table)
+            # integrations already exists from init_db
             tables = _get_tables(db_path)
-            assert "integrations" not in tables
             assert "browser_checks" not in tables
 
             # Schema version should still be 3.0.0
