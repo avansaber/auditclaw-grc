@@ -5,7 +5,7 @@ version: 1.0.0
 user-invocable: true
 homepage: https://www.auditclaw.ai
 source: https://github.com/avansaber/auditclaw-grc
-metadata: {"openclaw":{"type":"executable","requires":{"bins":["python3"],"anyBins":["chromium","google-chrome","brave","chromium-browser"],"env":[]},"os":["darwin","linux"]}}
+metadata: {"openclaw":{"type":"executable","install":{"pip":"scripts/requirements.txt","post":"python3 scripts/init_db.py"},"requires":{"bins":["python3"],"anyBins":["chromium","google-chrome","brave","chromium-browser"],"env":[],"optionalEnv":["AWS_ACCESS_KEY_ID","GITHUB_TOKEN","AZURE_SUBSCRIPTION_ID","GCP_PROJECT_ID","GOOGLE_APPLICATION_CREDENTIALS","GOOGLE_WORKSPACE_SA_KEY","OKTA_ORG_URL"]},"os":["darwin","linux"]}}
 ---
 
 # AuditClaw GRC
