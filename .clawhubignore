@@ -1,0 +1,25 @@
+# Tests (not needed for skill operation)
+tests/
+pytest.ini
+requirements-dev.txt
+
+# Build artifacts
+__pycache__/
+*.pyc
+*.pyo
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+
+# Git
+.git/
+.github/
+
+# Migration scripts (one-time use)
+scripts/migrate_*.py
+
+# Dev files
+CONTRIBUTING.md
+CHANGELOG.md
