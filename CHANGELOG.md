@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.0.0] - 2026-02-15 (ClawHub)
+
+### Added
+- Published all 6 skills to ClawHub (OpenClaw skill marketplace)
+- Added `homepage`, `source`, and `install` spec to SKILL.md metadata
+- Added Security Model section with credential documentation
+- Added `.clawhubignore` for clean package builds
+
+### Changed
+- Version reset to 1.0.0 for ClawHub publishing (previously versioned as 6.0.0 internally)
+- Pinned all pip dependencies to exact versions
+- SKILL.md rewritten for conciseness (755 lines to ~200 lines)
+- Fixed table count from 36 to 30 across all documentation and social content
+- Fixed action count from 96 to 97 across all social content
+
 ## [6.0.0] - 2026-02-15
 
 ### Added
@@ -12,7 +27,7 @@
 - SKILL.md consolidated: merged 5 versioned Quick Command Reference sections into one unified reference organized by category
 - All version-tagged section headings (V2, V3, V4, V5) removed in favor of flat, category-based organization
 - Proactive Suggestions table merged into single comprehensive table
-- Updated action count to 97, table count to 36
+- Updated action count to 97, table count to 30
 - Schema version bumped to 6.0.0
 
 ### Removed
